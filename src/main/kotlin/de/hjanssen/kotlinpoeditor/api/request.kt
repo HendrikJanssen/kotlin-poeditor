@@ -5,7 +5,6 @@ import io.ktor.client.request.*
 import io.ktor.client.request.forms.*
 import io.ktor.http.*
 
-
 data class POEditorResponseStatus(
     val status: String,
     val code: Int,
@@ -19,10 +18,10 @@ data class POEditorResponse<T>(
 
 class POEditorApi(val baseUrl: String, val token: String, val client: HttpClient) {
 
-    suspend inline fun <reified T, reified V> requestApi(
+    suspend inline fun <reified T> requestApi(
         path: String,
         parameters: List<Pair<String, String>>? = null
-    ): V where T : POEditorResponse<V> {
+    ): T where T : POEditorResponse<*> {
 
         val apiResponse = client.post<T> {
             url("$baseUrl$path")
@@ -41,7 +40,7 @@ class POEditorApi(val baseUrl: String, val token: String, val client: HttpClient
         }
 
         return when (apiResponse.response.status) {
-            "success" -> apiResponse.result!!
+            "success" -> apiResponse
             else -> throw POEditorException(apiResponse.response.code, apiResponse.response.message)
         }
     }

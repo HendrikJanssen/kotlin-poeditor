@@ -1,0 +1,24 @@
+name: build
+
+on:
+  push:
+    paths-ignore:
+      - '*.md'
+      - '*.yml'
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      -  name: Checkout the repo
+         uses: actions/checkout@v2
+         with:
+           fetch-depth: 0
+
+      -  name: Setup JDK
+         uses: actions/setup-java@v1
+         with:
+           java-version: '11'
+
+      -  name: Run tests
+         run: ./gradlew test

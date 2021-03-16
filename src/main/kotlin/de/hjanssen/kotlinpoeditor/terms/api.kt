@@ -3,11 +3,11 @@ package de.hjanssen.kotlinpoeditor.terms
 import de.hjanssen.kotlinpoeditor.api.POEditorApi
 import de.hjanssen.kotlinpoeditor.api.POEditorResponse
 
-internal data class ListTermsResponse(
+data class ListTermsResponse(
     val terms: List<Term>
 )
 
-suspend fun listTerms(api: POEditorApi, projectId: Int, language: String?): List<Term> {
+suspend inline fun listTerms(api: POEditorApi, projectId: Int, language: String?): List<Term> {
 
     var parameters = listOf("id" to "$projectId")
 
@@ -16,7 +16,7 @@ suspend fun listTerms(api: POEditorApi, projectId: Int, language: String?): List
     }
 
     val response =
-        api.requestApi<POEditorResponse<ListTermsResponse>, ListTermsResponse>("/v2/terms/list", parameters)
+        api.requestApi<POEditorResponse<ListTermsResponse>>("/v2/terms/list", parameters)
 
-    return response.terms
+    return response.result!!.terms
 }

@@ -8,7 +8,6 @@ import de.hjanssen.kotlinpoeditor.terms.Term
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.features.json.*
-import io.ktor.client.features.logging.*
 
 class POEditor(private val api: POEditorApi) {
 
@@ -17,8 +16,6 @@ class POEditor(private val api: POEditorApi) {
             install(JsonFeature) {
                 serializer = JacksonSerializer(jacksonObjectMapper().registerModule(JavaTimeModule()))
             }
-
-            install(Logging)
         }
     }
 
