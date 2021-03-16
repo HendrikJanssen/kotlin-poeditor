@@ -22,3 +22,15 @@ jobs:
 
       -  name: Run tests
          run: ./gradlew test
+
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v1
+        with:
+          name: Jacoco Test-Report
+          path: build/reports/jacoco/test/html
+
+      - name: Archive test results
+        uses: actions/upload-artifact@v1
+        with:
+          name: Gradle Test report
+          path: build/reports/tests/test
