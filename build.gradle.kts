@@ -1,5 +1,13 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+val kotestVersion: String by project
+val ktorVersion: String by project
+val jacksonVersion: String by project
+
 plugins {
     kotlin("jvm") version "1.4.31"
+
+    id("io.kotlintest") version "1.1.1"
 }
 
 group = "de.hjanssen"
@@ -12,10 +20,26 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib"))
 
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.12.+")
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.12.+")
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.12.+")
-    implementation("com.github.kittinunf.fuel:fuel:2.3.1")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
+    implementation("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
+
+    implementation("io.ktor:ktor-client-core:$ktorVersion")
+    implementation("io.ktor:ktor-client-cio:$ktorVersion")
+    implementation("io.ktor:ktor-client-jackson:$ktorVersion")
+    implementation("io.ktor:ktor-client-logging:$ktorVersion")
+
+    implementation("ch.qos.logback:logback-classic:1.2.3")
+
+    testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions.jvmTarget = "1.8"
 }
 
 sourceSets {

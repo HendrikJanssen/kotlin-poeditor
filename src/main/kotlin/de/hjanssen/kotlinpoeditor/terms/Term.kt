@@ -1,4 +1,4 @@
-package terms
+package de.hjanssen.kotlinpoeditor.terms
 
 import java.time.OffsetDateTime
 
