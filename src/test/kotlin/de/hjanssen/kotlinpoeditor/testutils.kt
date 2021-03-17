@@ -27,8 +27,8 @@ fun mockHttpClient(handler: suspend MockRequestHandleScope.(HttpRequestData) -> 
             serializer = JacksonSerializer(jacksonObjectMapper().registerModule(JavaTimeModule()))
         }
 
-        install(Logging) {
+        /*install(Logging) {
             level = LogLevel.ALL
-        }
+        }*/
     }
 }

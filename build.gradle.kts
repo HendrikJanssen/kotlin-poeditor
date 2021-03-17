@@ -34,17 +34,16 @@ dependencies {
 
     testImplementation("ch.qos.logback:logback-classic:1.2.3")
     testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
+    testImplementation("io.mockk:mockk:1.11.0")
 }
 
 tasks.withType<Test> {
     useJUnitPlatform()
-
-    finalizedBy(tasks.findByName("jacocoTestReport"))
 }
 
 tasks.withType<JacocoReport> {
     reports {
-        csv.isEnabled = true
+        xml.isEnabled = true
     }
 }
 

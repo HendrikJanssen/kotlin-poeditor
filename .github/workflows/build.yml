@@ -21,7 +21,7 @@ jobs:
            java-version: '11'
 
       -  name: Run tests
-         run: ./gradlew test
+         run: ./gradlew test ja
 
       - name: Archive code coverage results
         uses: actions/upload-artifact@v1
