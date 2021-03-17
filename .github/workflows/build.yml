@@ -21,7 +21,7 @@ jobs:
            java-version: '11'
 
       -  name: Run tests
-         run: ./gradlew test ja
+         run: ./gradlew test jacocoTestReport
 
       - name: Archive code coverage results
         uses: actions/upload-artifact@v1
